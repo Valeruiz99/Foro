@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+
+<head th:replace="./base :: head">
+</head>
+
+<body>
+    <nav th:replace="./base :: nav">
+    </nav>
+    <div class="container">
+        <h1 class="text-secundary border border-primary" th:text="${titulo}"></h1>
+        <div th:object="${usuarios}" th:remove="tag">
+            <ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+              <li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
+            </ul>
+        </div>
+        <form th:action="@{/usuarios/form}" th:object="${usuarios}" method="post">
+            <div class="form-group">
+                <label class="col-ms-2 col-form-label">Nombre</label>
+                <div class="col-ms-6">
+                    <input type="text" th:field="*{nombre}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+                    <label class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></label>
+                </div>
+                <label class="col-ms-2 col-form-label">Apellido</label>
+                <div class="col-ms-6">
+                    <input type="text" th:field="*{apellido}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+                    <label class="form-text text-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></label>
+                </div>
+                <label class="col-ms-2 col-form-label">Usuario</label>
+                <div class="col-ms-6">
+                    <input type="text" th:field="*{usuario}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+                    <label class="form-text text-danger" th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}"></label>
+                </div>
+                <label class="col-ms-2 col-form-label">Contraseña</label>
+                <div class="col-ms-6">
+                    <input type="text" th:field="*{contrasena}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+                    <label class="form-text text-danger" th:if="${#fields.hasErrors('contrasena')}" th:errors="*{contrasena}"></label>
+                </div>
+                <label class="col-ms-2 col-form-label">Teléfono</label>
+                <div class="col-ms-6">
+                    <input type="text" th:field="*{tel}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+                    <label class="form-text text-danger" th:if="${#fields.hasErrors('tel')}" th:errors="*{tel}"></label>
+                </div>
+                <div class="col-ms-6" style="padding-top: 2%;">
+                    <input type="submit" value="Guardar" class="btn btn-primary">
+                </div>
+                <input type="hidden" th:field="*{id}"/>
+            </div>
+        </form>
+    </div>
+    <footer th:replace="./base :: footer">
+    </footer>
+    <div th:replace="./base :: scripts">
+    </div>
+</body>
+
+</html>

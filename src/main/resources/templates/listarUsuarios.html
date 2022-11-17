@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+
+<head th:replace="./base :: head">
+</head>
+
+<body>
+    <nav th:replace="./base :: nav">
+    </nav>
+    <div class="container">
+        <h1 class="text-secundary border border-primary" th:text="${titulo}"></h1>
+        <p><a th:href="@{/usuarios/form}" class="btn btn-success btn-xs">Crear un nuevo usuario</a></p>
+        <table class="table table-striped">
+            <thead>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Usuario</th>
+                <th>Teléfono</th>
+            </thead>
+            <tbody>
+                <tr th:each="usuarios: ${usuarios}">
+                    <td th:text="${usuarios.id}"></td>
+                    <td th:text="${usuarios.nombre}"></td>
+                    <td th:text="${usuarios.apellido}"></td>
+                    <td th:text="${usuarios.usuario}"></td>
+                    <td th:text="${usuarios.contrasena}"></td>
+                    <td><a th:href="@{/usuarios/form/} + ${usuarios.id}" class="btn btn-primary btn-xs">Editar</a></td>
+                    <td><a th:href="@{/usuarios/eliminar/} + ${usuarios.id}" class="btn btn-danger btn-xs" onclick="return confirm('¿Seguro que desea eliminar?')">Eliminar</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <footer th:replace="./base :: footer">
+    </footer>
+    <div th:replace="./base :: scripts">
+    </div>
+</body>
+
+</html>

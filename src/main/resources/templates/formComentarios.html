@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head th:replace="./base :: head">
+
+</head>
+
+<body>
+    <nav th:replace="./base :: nav">
+
+    </nav>
+    <div class="container">
+        <h1 class="text-secundary border border-primary" th:text="${titulo}"></h1>
+        
+        <form th:action="@{/comentarios/form}" th:object="${comentarios}" method="post">
+            <div class="form-group">
+                <div class="form-group col-ms-6">
+                    <label class="col-ms-2 col-form-label">Usuario</label>
+                    <select class="form-control" th:field="*{usuario.id}">
+                        <option th:each="user: ${usuarios}" th:value="${user.id}" th:text="${user.nombre}"></option>
+                    </select>
+                </div>
+                <div class="form-group col-ms-6">
+                    <label class="col-ms-2 col-form-label">Publicación</label>
+                    <select class="form-control" th:field="*{publicacion.id}">
+                        <option th:each="pub: ${publicaciones}" th:value="${pub.id}" th:text="${pub.asunto}"></option>
+                    </select>
+                </div>
+                <div class="form-group col-ms-6">
+                    <label class="col-ms-2 col-form-label">Comentario</label>    
+                    <input type="text" th:field="*{contenido}" class="form-control" />
+                </div>
+                <div class="col-ms-6" style="padding-top: 2%;">
+                    <input type="submit" value="Guardar" class="btn btn-primary">
+                </div>
+                <input type="hidden" th:field="*{id}"/>
+            </div>
+        </form>
+    </div>
+    <footer th:replace="./base :: footer">
+    </footer>
+    <div th:replace="./base :: scripts">
+    </div>
+</body>
+
+</html>

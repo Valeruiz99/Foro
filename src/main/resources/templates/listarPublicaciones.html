@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+
+<head th:replace="./base :: head">
+</head>
+
+<body>
+    <nav th:replace="./base :: nav">
+    </nav>
+    <div class="container">
+        <h1 class="text-secundary border border-primary" th:text="${titulo}"></h1>
+        <p><a th:href="@{/publicaciones/form}" class="btn btn-success btn-xs">Crear una nueva publicación</a></p>
+        <table class="table table-striped">
+            <thead>
+                <th>Id</th>
+                <th>Asunto</th>
+                <th>Contenido</th>
+                <th>Usuario</th>
+                <th>Tema</th>
+            </thead>
+            <tbody>
+                <tr th:each="publicaciones: ${publicaciones}">
+                    <td th:text="${publicaciones.id}"></td>
+                    <td th:text="${publicaciones.asunto}"></td>
+                    <td th:text="${publicaciones.contenido}"></td>
+                    <td th:text="${publicaciones.usuario.nombre}"></td>
+                    <td th:text="${publicaciones.temas.nombre}"></td>
+                    <td><a th:href="@{/publicaciones/form/} + ${publicaciones.id}" class="btn btn-primary btn-xs">Editar</a></td>
+                    <td><a th:href="@{/publicaciones/eliminar/} + ${publicaciones.id}" class="btn btn-danger btn-xs" onclick="return confirm('¿Seguro que desea eliminar?')">Eliminar</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <footer th:replace="./base :: footer">
+    </footer>
+    <div th:replace="./base :: scripts">
+    </div>
+</body>
+
+</html>

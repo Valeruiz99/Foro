@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+
+<head th:replace="./base :: head">
+</head>
+
+<body>
+    <nav th:replace="./base :: nav">
+    </nav>
+    <div th:replace="./base :: export">
+    </div>
+    <div class="container">
+        <h1 class="text-secundary border border-primary" th:text="${titulo}"></h1>
+        <p><a th:href="@{/comentarios/form}" class="btn btn-success btn-xs">Crear un nuevo comentario</a></p>
+        <table class="table table-striped">
+            <thead>
+                <th>Id</th>
+                <th>Usuario</th>
+                <th>Publicación</th>
+                <th>Comentario</th>
+            </thead>
+            <tbody>
+                <tr th:each="comentarios: ${comentarios}">
+                    <td th:text="${comentarios.id}"></td>
+                    <td th:text="${comentarios.usuario.nombre}"></td>
+                    <td th:text="${comentarios.publicacion.asunto}"></td>
+                    <td th:text="${comentarios.contenido}"></td>
+                    <td><a th:href="@{/comentarios/form/} + ${comentarios.id}" class="btn btn-primary btn-xs">Editar</a></td>
+                    <td><a th:href="@{/comentarios/eliminar/} + ${comentarios.id}" class="btn btn-danger btn-xs" onclick="return confirm('¿Seguro que desea eliminar?')">Eliminar</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <footer th:replace="./base :: footer">
+    </footer>
+    <div th:replace="./base :: scripts">
+    </div>
+</body>
+
+</html>
